@@ -1,4 +1,4 @@
-/*Theme switching for bg and progress bar*/
+/*Progress bar*/
 window.onscroll = function () { myFunction() };
 
 function myFunction() {
@@ -8,6 +8,7 @@ function myFunction() {
     document.getElementById("myBar").style.width = scrolled + "%";
 }
 
+/*Theme switcher*/
 const themeSwitch = document.getElementById('themeSwitch');
 const scroll = document.getElementById('myBar');
 
@@ -17,7 +18,7 @@ const currentTheme = body.getAttribute('data-bs-theme');
 themeSwitch.addEventListener('change', function () {
     if (this.checked) {
         body.setAttribute('data-bs-theme', 'dark');
-        document.getElementById("myBar").style.background = "#f2f2fc";
+        document.getElementById("myBar").style.background = "#0dcaf0";
     } else {
         body.setAttribute('data-bs-theme', 'light');
         document.getElementById("myBar").style.background = "#302e4d";
@@ -25,28 +26,31 @@ themeSwitch.addEventListener('change', function () {
 });
 
 if (currentTheme === 'dark') {
-    themeSwitch.checked = true;
+  themeSwitch.checked = true;
 }
 
 /*Type Writer*/
 new Typewriter('#typewriter', {
-    strings: ["code,", "make videos,", "explore,", "hustle."],
-    autoStart: true,   
-    loop: true,         
+  strings: ["code,", "make videos,", "explore,", "hustle."],
+  autoStart: true,   
+  loop: true,         
 });
 
-/*Switching Tabs*/
-function openCity(evt, cityName) {
-    var i, tabcontent, tablinks;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-    }
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-    document.getElementById(cityName).style.display = "block";
-    evt.currentTarget.className += " active";
-}
-document.getElementById("defaultOpen").click();
+/*Switching tabs in about section*/
+var tab = new bootstrap.Tab(document.getElementById('myTab'));
+tab.show(document.querySelector('.nav-link.active'));
+document.getElementById("bio-tab").click();
+var tabs = document.querySelectorAll('.nav-link');
+tabs.forEach(function(tab) {
+  tab.addEventListener('click', function(event) {
+    event.preventDefault();
+    new bootstrap.Tab(document.getElementById('myTabContent')).show(this.getAttribute('href'));
+  });
+});
+document.getElementById("bio-tab").click();
+
+/*showing tooltips*/
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl);
+});
